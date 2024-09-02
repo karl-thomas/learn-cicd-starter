@@ -28,5 +28,8 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
 
-      - name: 'Use gcloud CLI'
+      - name: 'push image to AR'
         run: 'gcloud builds submit --tag us-central1-docker.pkg.dev/notely-434420/notely-ar-repo/notely:latest .'
+      
+      - name: 'deploy to Cloud Run'
+        run: 'gcloud run deploy notely --image us-central1-docker.pkg.dev/notely-434420/notely-ar-repo/notely:latest --project notely-434420 --region us-central1 --allow-unauthenticated --max-instances=4'
